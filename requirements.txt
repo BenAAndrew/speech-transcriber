@@ -6,5 +6,6 @@ omegaconf==2.2.3
 librosa==0.9.2
 transformers==4.24.0
 SentencePiece==0.1.97
+speechbrain==0.5.13
 vosk==0.3.44
 git+https://github.com/openai/whisper.git
