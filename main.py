@@ -6,6 +6,7 @@ from transcribers.librispeech import Librispeech
 from transcribers.silero import Silero
 from transcribers.vosk import Vosk
 from transcribers.wav2vec2 import Wav2Vec2
+from transcribers.wav2vec2_commonvoice import Wav2Vec2CommonVoice
 from transcribers.whisper import Whisper
 
 c = CMUSphinx()
@@ -21,6 +22,9 @@ print(whisper.transcribe("audio.wav"))
 
 wav2vec2 = Wav2Vec2()
 print(wav2vec2.transcribe("audio.wav"))
+
+wav2vec2_commonvoice = Wav2Vec2CommonVoice()
+print(wav2vec2_commonvoice.transcribe("audio.wav"))
 
 vosk = Vosk()
 print(vosk.transcribe("audio.wav"))

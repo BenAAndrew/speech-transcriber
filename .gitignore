@@ -128,5 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-
+# Custom
 audio.mp3
+test-clean/
+model_checkpoints/
+pretrained_models/

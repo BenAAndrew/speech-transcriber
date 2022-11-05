@@ -4,6 +4,7 @@ from transcribers.librispeech import Librispeech
 from transcribers.silero import Silero
 from transcribers.vosk import Vosk
 from transcribers.wav2vec2 import Wav2Vec2
+from transcribers.wav2vec2_commonvoice import Wav2Vec2CommonVoice
 from transcribers.whisper import Whisper
 
 AUDIO = os.path.join("tests", "audio.wav")
@@ -27,6 +28,11 @@ def test_whisper():
 def test_wav_2_vec_2():
     wav2vec2 = Wav2Vec2()
     assert wav2vec2.transcribe(AUDIO).strip().lower() == "this recording is from the british council"
+
+
+def test_wav_2_vec_2_commonvoice():
+    wav2vec2_commonvoice = Wav2Vec2CommonVoice()
+    assert wav2vec2_commonvoice.transcribe(AUDIO).lower() == "this recording is from the british council"
 
 
 def test_vosk():

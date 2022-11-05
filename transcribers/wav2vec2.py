@@ -20,14 +20,8 @@ class Wav2Vec2(Transcriber):
             raise Exception(f"Cannot load audio file {path}")
 
         data = torch.tensor([wav])
-    
-        # tokenize
         input_values = self.processor(data[0], return_tensors="pt", padding="longest").input_values
-        
-        # retrieve logits
         logits = self.model(input_values).logits
-        
-        # take argmax and decode
         predicted_ids = torch.argmax(logits, dim=-1)
         transcription = self.processor.batch_decode(predicted_ids)
         return transcription[0]
