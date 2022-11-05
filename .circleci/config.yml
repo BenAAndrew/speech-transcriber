@@ -15,7 +15,7 @@ jobs:
       - checkout
       - run:
           name: Install os libraries
-          command: sudo apt-get update && sudo apt-get install -y libsndfile1
+          command: sudo apt-get update && sudo apt-get install -y ffmpeg libsndfile1
       - python/install-packages:
           pkg-manager: pip
       - run:
