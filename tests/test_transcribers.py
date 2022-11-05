@@ -1,6 +1,7 @@
 import os
 from transcribers.cmu_sphinx import CMUSphinx
 from transcribers.silero import Silero
+from transcribers.vosk import Vosk
 from transcribers.wav2vec2 import Wav2Vec2
 from transcribers.whisper import Whisper
 
@@ -25,3 +26,8 @@ def test_whisper():
 def test_wav_2_vec_2():
     wav2vec2 = Wav2Vec2()
     assert wav2vec2.transcribe(AUDIO).strip().lower() == "this recording is from the british council"
+
+
+def test_vosk():
+    vosk = Vosk()
+    assert vosk.transcribe(AUDIO) == "this recording is from the british council"

@@ -9,6 +9,8 @@ def convert_audio(input_path: str, output_path: str):
             "ffmpeg",
             "-i",
             input_path,
+            "-ac",
+            "1",
             "-ab",
             TARGET_BITRATE,
             "-acodec",
