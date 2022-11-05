@@ -1,6 +1,5 @@
 from subprocess import check_output
 
-TARGET_SAMPLE_RATE = 22050
 TARGET_BITRATE = "128"
 
 
