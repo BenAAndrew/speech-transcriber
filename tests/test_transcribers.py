@@ -24,4 +24,4 @@ def test_whisper():
 
 def test_wav_2_vec_2():
     wav2vec2 = Wav2Vec2()
-    assert wav2vec2.transcribe(AUDIO).strip() == "this recording is from the british council"
+    assert wav2vec2.transcribe(AUDIO).strip().lower() == "this recording is from the british council"

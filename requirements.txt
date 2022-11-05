@@ -1,8 +1,8 @@
 SpeechRecognition==3.8.1
 pocketsphinx==5.0.0
-torch==1.12.1
-torchaudio==0.12.1
+torch==1.13.0
+torchaudio==0.13.0
 omegaconf==2.2.3
 librosa==0.9.2
-huggingsound==0.1.6
+transformers==4.24.0
 git+https://github.com/openai/whisper.git
