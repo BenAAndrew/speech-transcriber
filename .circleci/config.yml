@@ -13,6 +13,9 @@ jobs:
       - image: cimg/python:3.9.15
     steps:
       - checkout
+      - run:
+          name: Install os libraries
+          command: sudo apt-get update && sudo apt-get install -y libsndfile1
       - python/install-packages:
           pkg-manager: pip
       - run:
