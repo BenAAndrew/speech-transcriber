@@ -8,4 +8,6 @@ transformers==4.24.0
 SentencePiece==0.1.97
 speechbrain==0.5.13
 vosk==0.3.44
+punctuator==0.9.6
+numpy==1.21.5
 git+https://github.com/openai/whisper.git
