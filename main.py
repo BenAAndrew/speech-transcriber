@@ -1,35 +1,27 @@
+import argparse
+import uuid
 import os
 
 from audio import convert_audio
-from transcribers.cmu_sphinx import CMUSphinx
-from transcribers.librispeech import Librispeech
-from transcribers.silero import Silero
-from transcribers.vosk import Vosk
-from transcribers.wav2vec2 import Wav2Vec2
-from transcribers.wav2vec2_commonvoice import Wav2Vec2CommonVoice
-from transcribers.whisper import Whisper
+from select_transcriber import select_transcriber, Transcriber
 
-c = CMUSphinx()
-convert_audio("audio.mp3", "audio.wav")
 
-print(c.transcribe("audio.wav"))
+def transcribe_file(path: str, transcriber_name: str):
+    assert os.path.isfile(path), f"{path} file does not exist"
+    converted_path = f"{uuid.uuid4()}.wav"
+    convert_audio(path, converted_path)
+    transcriber = select_transcriber(transcriber_name)
+    print(transcriber.transcribe(converted_path))
+    os.remove(converted_path)
 
-s = Silero()
-print(s.transcribe("audio.wav"))
 
-whisper = Whisper()
-print(whisper.transcribe("audio.wav"))
+def main():
+    parser = argparse.ArgumentParser(description="Transcribe a given audio file")
+    parser.add_argument("-p", "--path", type=str, help="Audio file path", required=True)
+    parser.add_argument("-t", "--transcriber", type=str, help="Transcriber to use", choices=[t.value for t in Transcriber], required=True)
+    args = parser.parse_args()
+    transcribe_file(args.path, args.transcriber)
 
-wav2vec2 = Wav2Vec2()
-print(wav2vec2.transcribe("audio.wav"))
 
-wav2vec2_commonvoice = Wav2Vec2CommonVoice()
-print(wav2vec2_commonvoice.transcribe("audio.wav"))
-
-vosk = Vosk()
-print(vosk.transcribe("audio.wav"))
-
-librispeech = Librispeech()
-print(librispeech.transcribe("audio.wav"))
-
-os.remove("audio.wav")
+if __name__ == "__main__":
+    main()
