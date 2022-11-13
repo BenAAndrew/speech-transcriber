@@ -20,11 +20,7 @@ class Librispeech(Transcriber):
             raise Exception(f"Cannot load audio file {path}")
 
         data = torch.tensor([wav])
-        input_features = self.processor(
-            data[0],
-            sampling_rate=16000,
-            return_tensors="pt"
-        ).input_features 
+        input_features = self.processor(data[0], sampling_rate=16000, return_tensors="pt").input_features
         generated_ids = self.model.generate(input_features)
         transcription = self.processor.batch_decode(generated_ids)
         return transcription[0]

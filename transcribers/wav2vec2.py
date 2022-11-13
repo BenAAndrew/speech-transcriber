@@ -10,8 +10,8 @@ class Wav2Vec2(Transcriber):
     """
 
     def __init__(self):
-       self.processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base-960h")
-       self.model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
+        self.processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base-960h")
+        self.model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
 
     def transcribe(self, path: str) -> str:
         try:

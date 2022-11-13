@@ -11,11 +11,13 @@ class Vosk(Transcriber):
     """
 
     def __init__(self):
-       self.model = Model(lang="en-us")
+        self.model = Model(lang="en-us")
 
     def transcribe(self, path: str) -> str:
         wf = wave.open(path, "rb")
-        assert wf.getnchannels() == 1 and wf.getsampwidth() == 2 and wf.getcomptype() == "NONE", "Audio file must be WAV format mono PCM."
+        assert (
+            wf.getnchannels() == 1 and wf.getsampwidth() == 2 and wf.getcomptype() == "NONE"
+        ), "Audio file must be WAV format mono PCM."
 
         rec = KaldiRecognizer(self.model, wf.getframerate())
         rec.SetWords(True)

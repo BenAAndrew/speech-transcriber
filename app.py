@@ -19,12 +19,12 @@ def index():
 def transcribe():
     id = uuid.uuid4()
     path = os.path.join(AUDIO_FOLDER, f"{id}.wav")
-    request.files['file'].save(path)
-    text = transcribe_file(path, request.values['transcriber'])
+    request.files["file"].save(path)
+    text = transcribe_file(path, request.values["transcriber"])
     text_file = os.path.join(OUTPUT_FOLDER, f"{id}.txt")
-    with open(text_file, 'w') as f:
+    with open(text_file, "w") as f:
         for line in text:
-            f.write(line+'\n')
+            f.write(line + "\n")
     return send_file(text_file, as_attachment=True)
 
 

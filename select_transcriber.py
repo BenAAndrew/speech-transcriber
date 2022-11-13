@@ -8,6 +8,7 @@ from transcribers.wav2vec2 import Wav2Vec2
 from transcribers.wav2vec2_commonvoice import Wav2Vec2CommonVoice
 from transcribers.whisper import Whisper
 
+
 class Transcriber(Enum):
     CMU_SPHINX = "cmu_sphinx"
     LIBRISPEECH = "librispeech"

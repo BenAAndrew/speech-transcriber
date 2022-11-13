@@ -31,7 +31,14 @@ def main():
     os.makedirs(AUDIO_FOLDER, exist_ok=True)
     parser = argparse.ArgumentParser(description="Transcribe a given audio file")
     parser.add_argument("-f", "--file", type=str, help="Audio file path", required=True)
-    parser.add_argument("-t", "--transcriber", type=str, help="Transcriber to use", choices=[t.value for t in Transcriber], required=True)
+    parser.add_argument(
+        "-t",
+        "--transcriber",
+        type=str,
+        help="Transcriber to use",
+        choices=[t.value for t in Transcriber],
+        required=True,
+    )
     parser.add_argument("-p", "--punctuator", type=str, help="Punctuation model to use", required=False)
     args = parser.parse_args()
     punctuator = Punctuator(args.punctuator) if args.punctuator else None

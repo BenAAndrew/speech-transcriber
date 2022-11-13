@@ -20,10 +20,11 @@ MODELS = {
     "vosk": Vosk(),
     "wav2vec2_commonvoice": Wav2Vec2CommonVoice(),
     "wav2vec2": Wav2Vec2(),
-    "whisper": Whisper()
+    "whisper": Whisper(),
 }
 
 assert os.path.isdir(DATASET_PATH), "Missing test dataset. Download test-clean from http://www.openslr.org/12"
+
 
 def extract_dataset():
     clips = {}
@@ -32,9 +33,9 @@ def extract_dataset():
         for subfolder in os.listdir(os.path.join(DATASET_PATH, folder)):
             path = os.path.join(DATASET_PATH, folder, subfolder)
             with open(os.path.join(path, f"{folder}-{subfolder}.trans.txt")) as f:
-                text_file = [l for l in f.read().split('\n') if l]
+                text_file = [l for l in f.read().split("\n") if l]
                 for line in text_file:
-                    filename, text = line.split(' ', 1)
+                    filename, text = line.split(" ", 1)
                     output_path = os.path.join(path, f"{filename}.wav")
                     if not os.path.isfile(output_path):
                         original_path = os.path.join(path, f"{filename}.flac")
@@ -62,8 +63,8 @@ for name, model in MODELS.items():
     durations = []
     for filepath, text in tqdm(clips.items()):
         start = time.time()
-        prediciton = re.sub(r'[^a-zA-Z0-9 ]', '', model.transcribe(filepath).lower())
+        prediciton = re.sub(r"[^a-zA-Z0-9 ]", "", model.transcribe(filepath).lower())
         duration = time.time() - start
         scores.append(similarity(text, prediciton))
         durations.append(duration)
-    print(name, "Score:", sum(scores)/len(scores), "Avg duration (single):", sum(durations)/len(durations))
+    print(name, "Score:", sum(scores) / len(scores), "Avg duration (single):", sum(durations) / len(durations))

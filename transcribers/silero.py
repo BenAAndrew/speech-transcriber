@@ -3,8 +3,6 @@ import librosa
 
 from transcribers.transcriber import Transcriber
 
-SILERO_LANGUAGES = {"English": "en", "German": "de", "Spanish": "es"}
-
 
 class Silero(Transcriber):
     """
