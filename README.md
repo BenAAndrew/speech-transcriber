@@ -41,12 +41,12 @@ Below is a comparison of transcription model performance produced using the [Lib
 
 | Name | Dependencies | Model Size | Average processing time | Score
 |-|-|-|-|-|
-| Wav2Vec2 CommonVoice | speechbrain | 1.18GB | 3.351s | 0.87
-| Librispeech | torch, transformers, torchaudio, librosa | 113MB | 0.558s | 0.85
-| Wav2Vec2 | torch, transformers, torchaudio, librosa | 360MB | 1.325s | 0.8
-| Whisper | whisper | 138MB | 3.848s | 0.77
-| Vosk | vosk | 67.7MB | 1.206s | 0.76
-| Silero | torch, transformers, torchaudio, librosa, omegaconf | 111MB | 0.261s | 0.68 |
-| CMU Sphinx | SpeechRecognition, pocketsphinx | 33.9MB* | 1.123s | 0.55
+| [Wav2Vec2 CommonVoice](https://huggingface.co/speechbrain/asr-wav2vec2-commonvoice-en) | speechbrain | 1.18GB | 3.351s | 0.87
+| [Librispeech](https://huggingface.co/facebook/s2t-small-librispeech-asr) | torch, transformers, torchaudio, librosa | 113MB | 0.558s | 0.85
+| [Wav2Vec2](https://huggingface.co/facebook/wav2vec2-base-960h) | torch, transformers, torchaudio, librosa | 360MB | 1.325s | 0.8
+| [Whisper](https://github.com/openai/whisper) | whisper | 138MB | 3.848s | 0.77
+| [Vosk](https://alphacephei.com/vosk/) | vosk | 67.7MB | 1.206s | 0.76
+| [Silero](https://github.com/snakers4/silero-models) | torch, transformers, torchaudio, librosa, omegaconf | 111MB | 0.261s | 0.68 |
+| [CMU Sphinx](https://cmusphinx.github.io/wiki/) | SpeechRecognition, pocketsphinx | 33.9MB* | 1.123s | 0.55
 
 *size of pocketsphinx package
