@@ -15,15 +15,14 @@ def transcribe_file(file_path: str, transcriber_name: str, punctuator: Punctuato
     converted_path = os.path.join(AUDIO_FOLDER, f"{uuid.uuid4()}.wav")
     convert_audio(file_path, converted_path)
     transcriber = select_transcriber(transcriber_name)
-    chunks = generate_clips(converted_path, CHUNKS_FOLDER)
-    text = []
-    for chunk in chunks:
-        transcription = transcriber.transcribe(chunk)
+    clips = generate_clips(converted_path, CHUNKS_FOLDER)
+    for clip in clips:
+        transcription = transcriber.transcribe(clip.path)
         if punctuator:
             transcription = punctuator.punctuate(transcription)
-        text.append(transcription)
+        clip.set_text(transcription)
     os.remove(converted_path)
-    return text
+    return clips
 
 
 def main():
@@ -42,9 +41,9 @@ def main():
     parser.add_argument("-p", "--punctuator", type=str, help="Punctuation model to use", required=False)
     args = parser.parse_args()
     punctuator = Punctuator(args.punctuator) if args.punctuator else None
-    text = transcribe_file(args.file, args.transcriber, punctuator)
-    for line in text:
-        print(line)
+    clips = transcribe_file(args.file, args.transcriber, punctuator)
+    for clip in clips:
+        print(clip.text)
 
 
 if __name__ == "__main__":

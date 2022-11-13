@@ -2,6 +2,7 @@ import os
 import uuid
 from flask import Flask, render_template, request, send_file
 from main import transcribe_file
+from output import to_json_file, to_text_file
 
 app = Flask(__name__, template_folder="static")
 
@@ -20,12 +21,16 @@ def transcribe():
     id = uuid.uuid4()
     path = os.path.join(AUDIO_FOLDER, f"{id}.wav")
     request.files["file"].save(path)
-    text = transcribe_file(path, request.values["transcriber"])
-    text_file = os.path.join(OUTPUT_FOLDER, f"{id}.txt")
-    with open(text_file, "w") as f:
-        for line in text:
-            f.write(line + "\n")
-    return send_file(text_file, as_attachment=True)
+    clips = transcribe_file(path, request.values["transcriber"])
+    
+    if request.values["format"] == "text":
+        file_path = os.path.join(OUTPUT_FOLDER, f"{id}.txt")
+        to_text_file(clips, file_path)
+    elif request.values["format"] == "json":
+        file_path = os.path.join(OUTPUT_FOLDER, f"{id}.json")
+        to_json_file(clips, file_path)
+    
+    return send_file(file_path, as_attachment=True)
 
 
 if __name__ == "__main__":

@@ -28,6 +28,28 @@ def convert_audio(input_path: str, output_path: str):
     )
 
 
+class Clip:
+    path: str
+    start: int
+    end: int
+    text: str
+
+    def __init__(self, path, start, end):
+        self.path = path
+        self.start = start
+        self.end = end
+
+    def set_text(self, text):
+        self.text = text
+
+    def to_dict(self):
+        return {
+            "text": self.text,
+            "start": self.start,
+            "end": self.end
+        }
+
+
 def generate_clips(file_path: str, output_folder: str, max_clip_length: int=30000):
     """
     Divides a given audio file into a set of clips (split on silence)
@@ -44,24 +66,25 @@ def generate_clips(file_path: str, output_folder: str, max_clip_length: int=3000
     Returns
     -------
     list
-        List of clip paths
+        List of Clips (containing path, start & end)
     """
     filename = Path(file_path).stem
     sound_file = AudioSegment.from_wav(file_path)
 
     if len(sound_file) <= max_clip_length:
-        return [file_path]
+        return [Clip(file_path, 0, len(sound_file))]
 
     clip_ranges = split_silence(sound_file)
     combined_clip_ranges = combine_clips(clip_ranges, max_clip_length)
-    audio_chunks = [sound_file[start:end] for start,end in combined_clip_ranges]
-    files = []
-    for i, chunk in enumerate(audio_chunks):
+    clips = []
+    for i, (start, end) in enumerate(combined_clip_ranges):
+        audio = sound_file[start:end]
         path = os.path.join(output_folder, f"chunk-{filename}-{i}.wav")
-        chunk.export(path, format="wav")
-        files.append(path)
+        audio.export(path, format="wav")
+        clip = Clip(path, start, end)
+        clips.append(clip)
 
-    return files
+    return clips
 
 
 def combine_clips(clip_ranges: List[List[int]], max_clip_length: int):
