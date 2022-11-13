@@ -12,7 +12,9 @@ A web-app/library for transcribing speech
 ## Usages
 
 ### Web app
-`python app.py` opens the web app at http://localhost:5000/
+Run `pip install flask` before running the web app.
+
+Then run `python app.py` to open the web app at http://localhost:5000/
 
 ### CLI
 `python main.py --path filename --transcriber transcriber`
