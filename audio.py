@@ -1,5 +1,6 @@
 import os
 from subprocess import check_output
+from pathlib import Path 
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 
@@ -24,6 +25,7 @@ def convert_audio(input_path: str, output_path: str):
 
 
 def split_silence(file_path: str, output_folder: str):
+    filename = Path(file_path).stem
     sound_file = AudioSegment.from_wav(file_path)
     audio_chunks = split_on_silence(sound_file, 
 	    min_silence_len=800,
@@ -32,7 +34,7 @@ def split_silence(file_path: str, output_folder: str):
 
     files = []
     for i, chunk in enumerate(audio_chunks):
-        path = os.path.join(output_folder, f"chunk-{i}.wav")
+        path = os.path.join(output_folder, f"chunk-{filename}-{i}.wav")
         chunk.export(path, format="wav")
         files.append(path)
     

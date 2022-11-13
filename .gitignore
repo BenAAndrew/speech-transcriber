@@ -134,4 +134,5 @@ test-clean/
 model_checkpoints/
 pretrained_models/
 chunks/
+audio/
 INTERSPEECH-T-BRNN.pcl
