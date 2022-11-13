@@ -1,0 +1,23 @@
+body {
+    background: #BCE29E !important;
+}
+
+.main .panel-default {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.main .panel-body {
+    padding: 5%;
+    background: #fff;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+img {
+    width: 30%;
+    margin-bottom: 10%;
+}

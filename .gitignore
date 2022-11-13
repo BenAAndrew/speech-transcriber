@@ -135,4 +135,5 @@ model_checkpoints/
 pretrained_models/
 chunks/
 audio/
+output/
 INTERSPEECH-T-BRNN.pcl

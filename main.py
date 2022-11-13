@@ -16,12 +16,14 @@ def transcribe_file(file_path: str, transcriber_name: str, punctuator: Punctuato
     convert_audio(file_path, converted_path)
     transcriber = select_transcriber(transcriber_name)
     chunks = split_silence(converted_path, CHUNKS_FOLDER)
+    text = []
     for chunk in chunks:
         transcription = transcriber.transcribe(chunk)
         if punctuator:
             transcription = punctuator.punctuate(transcription)
-        print(transcription)
+        text.append(transcription)
     os.remove(converted_path)
+    return text
 
 
 def main():
@@ -33,7 +35,9 @@ def main():
     parser.add_argument("-p", "--punctuator", type=str, help="Punctuation model to use", required=False)
     args = parser.parse_args()
     punctuator = Punctuator(args.punctuator) if args.punctuator else None
-    transcribe_file(args.file, args.transcriber, punctuator)
+    text = transcribe_file(args.file, args.transcriber, punctuator)
+    for line in text:
+        print(line)
 
 
 if __name__ == "__main__":

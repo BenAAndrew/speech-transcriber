@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Speech Transcriber</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img src="{{ url_for('static', filename='image.png') }}" alt="speech-to-text">
+                        <h1 class="text-center">Speech Transcriber</h1>
+                        <p>Transcribe an audio file of speech</p>
+                        <form role="form" method="POST" enctype="multipart/form-data" action="/">
+                            <div class="form-group">
+                                <label for="transcriber">Transcriber</label>
+                                <select class="form-control" name="transcriber" id="transcriber" required>
+                                    <option value="librispeech">Librispeech (speed: Fast, quality: Very good)</option>
+                                    <option value="wav2vec2">Wav2Vec2 (speed: OK, Quality: Very good)</option>
+                                    <option value="silero">Silero (speed: Very fast, quality: OK)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="format">Output format</label>
+                                <select class="form-control" name="format" id="format" required>
+                                    <option value="text">Text file</option>
+                                    <option value="srt">Subtitle</option>
+                                    <option value="json">JSON</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input type="file" id="file" name="file" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input class="btn btn-lg btn-success btn-block" type="submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
