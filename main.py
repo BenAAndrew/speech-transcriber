@@ -3,7 +3,7 @@ import uuid
 import os
 from punctuator import Punctuator
 
-from audio import convert_audio, split_silence
+from audio import convert_audio, generate_clips
 from select_transcriber import select_transcriber, Transcriber
 
 CHUNKS_FOLDER = "chunks"
@@ -15,7 +15,7 @@ def transcribe_file(file_path: str, transcriber_name: str, punctuator: Punctuato
     converted_path = os.path.join(AUDIO_FOLDER, f"{uuid.uuid4()}.wav")
     convert_audio(file_path, converted_path)
     transcriber = select_transcriber(transcriber_name)
-    chunks = split_silence(converted_path, CHUNKS_FOLDER)
+    chunks = generate_clips(converted_path, CHUNKS_FOLDER)
     text = []
     for chunk in chunks:
         transcription = transcriber.transcribe(chunk)
