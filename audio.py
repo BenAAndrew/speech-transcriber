@@ -43,14 +43,10 @@ class Clip:
         self.text = text
 
     def to_dict(self):
-        return {
-            "text": self.text,
-            "start": self.start,
-            "end": self.end
-        }
+        return {"text": self.text, "start": self.start, "end": self.end}
 
 
-def generate_clips(file_path: str, output_folder: str, max_clip_length: int=30000):
+def generate_clips(file_path: str, output_folder: str, max_clip_length: int = 30000):
     """
     Divides a given audio file into a set of clips (split on silence)
 
@@ -89,11 +85,11 @@ def generate_clips(file_path: str, output_folder: str, max_clip_length: int=3000
 
 def combine_clips(clip_ranges: List[List[int]], max_clip_length: int):
     for i in range(1, len(clip_ranges)):
-        start = clip_ranges[i-1][0]
+        start = clip_ranges[i - 1][0]
         end = clip_ranges[i][1]
         duration = end - start
         if duration <= max_clip_length:
-            clip_ranges[i-1] = [start, end]
+            clip_ranges[i - 1] = [start, end]
             del clip_ranges[i]
             return combine_clips(clip_ranges, max_clip_length)
 

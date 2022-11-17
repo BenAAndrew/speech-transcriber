@@ -18,8 +18,14 @@ def test_generate_clips():
 
     transcription = [transcriber.transcribe(chunk.path) for chunk in chunks]
     assert len(transcription) == 2
-    assert transcription[0] == "during long slushy country roads and speaking to damp audiences and draughty schoolrooms there after day for a fortnight"
-    assert transcription[1] == "he'll have to put him in of herums at some place of worship on sunday morning and he can come to us immediately afterwards"
+    assert (
+        transcription[0]
+        == "during long slushy country roads and speaking to damp audiences and draughty schoolrooms there after day for a fortnight"
+    )
+    assert (
+        transcription[1]
+        == "he'll have to put him in of herums at some place of worship on sunday morning and he can come to us immediately afterwards"
+    )
     shutil.rmtree(CHUNKS_FOLDER)
 
 
