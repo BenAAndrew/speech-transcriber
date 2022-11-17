@@ -2,7 +2,7 @@ import os
 import uuid
 from flask import Flask, render_template, request, send_file
 from main import transcribe_file
-from output import to_json_file, to_text_file
+from output import to_json_file, to_srt_file, to_text_file
 
 app = Flask(__name__, template_folder="static")
 
@@ -22,14 +22,19 @@ def transcribe():
     path = os.path.join(AUDIO_FOLDER, f"{id}.wav")
     request.files["file"].save(path)
     clips = transcribe_file(path, request.values["transcriber"])
-    
+
     if request.values["format"] == "text":
         file_path = os.path.join(OUTPUT_FOLDER, f"{id}.txt")
         to_text_file(clips, file_path)
     elif request.values["format"] == "json":
         file_path = os.path.join(OUTPUT_FOLDER, f"{id}.json")
         to_json_file(clips, file_path)
-    
+    elif request.values["format"] == "srt":
+        file_path = os.path.join(OUTPUT_FOLDER, f"{id}.srt")
+        to_srt_file(clips, file_path)
+    else:
+        raise Exception(f"Unsupported export format '{request.values['format']}'")
+
     return send_file(file_path, as_attachment=True)
 
 
