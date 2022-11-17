@@ -13,7 +13,10 @@ def test_generate_clips():
     os.makedirs(CHUNKS_FOLDER)
     transcriber = Librispeech()
     chunks = generate_clips(AUDIO, CHUNKS_FOLDER, max_clip_length=500)
-    transcription = [transcriber.transcribe(chunk) for chunk in chunks]
+    assert chunks[0].path == os.path.join(CHUNKS_FOLDER, "chunk-audio2-0.wav")
+    assert chunks[1].path == os.path.join(CHUNKS_FOLDER, "chunk-audio2-1.wav")
+
+    transcription = [transcriber.transcribe(chunk.path) for chunk in chunks]
     assert len(transcription) == 2
     assert transcription[0] == "during long slushy country roads and speaking to damp audiences and draughty schoolrooms there after day for a fortnight"
     assert transcription[1] == "he'll have to put him in of herums at some place of worship on sunday morning and he can come to us immediately afterwards"
