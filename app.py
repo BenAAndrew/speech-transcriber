@@ -21,7 +21,8 @@ def transcribe():
     id = uuid.uuid4()
     path = os.path.join(AUDIO_FOLDER, f"{id}.wav")
     request.files["file"].save(path)
-    clips = transcribe_file(path, request.values["transcriber"])
+    max_clip_length = int(request.values["maxClipLength"]) * 1000
+    clips = transcribe_file(path, request.values["transcriber"], punctuator=None, max_clip_length=max_clip_length)
 
     if request.values["format"] == "text":
         file_path = os.path.join(OUTPUT_FOLDER, f"{id}.txt")

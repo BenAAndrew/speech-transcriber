@@ -21,3 +21,27 @@ img {
     width: 30%;
     margin-bottom: 10%;
 }
+
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+.active,
+.accordion:hover {
+    background-color: #ccc;
+}
+
+.accordion-panel {
+    padding: 0 10px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}
